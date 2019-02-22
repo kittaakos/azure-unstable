@@ -1,0 +1,23 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+pr:
+- master
+
+jobs:
+- job: common_build_linux
+  displayName: 'Common Build (Linux)'
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+    - bash: './gradlew clean build'
+      displayName: 'Build - Gradle'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'build/test-results/test/*.xml'
+        testRunTitle: 'Tests'
+      displayName: 'Publish - Test Results'
