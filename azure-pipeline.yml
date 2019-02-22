@@ -8,8 +8,8 @@ pr:
 - master
 
 jobs:
-- job: common_build_linux
-  displayName: 'Common Build (Linux)'
+- job: build_linux
+  displayName: 'Build (Linux)'
   pool:
     vmImage: ubuntu-16.04
   steps:
@@ -21,3 +21,4 @@ jobs:
         testResultsFiles: 'build/test-results/test/*.xml'
         testRunTitle: 'Tests'
       displayName: 'Publish - Test Results'
+      condition: always()
